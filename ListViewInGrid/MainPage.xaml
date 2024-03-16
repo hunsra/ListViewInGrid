@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:ListViewInGrid"
+			 x:Class="ListViewInGrid.MainPage"
+			 BindingContext="{x:Static local:ViewModelLocator.ViewModel}"
+			 x:DataType="local:ViewModel">
+
+	<Grid x:Name="MainGrid"
+		  ColumnDefinitions="Auto,Auto,*"
+		  RowDefinitions="Auto,*">
+
+		<ListView Grid.Column="0"
+				  Grid.ColumnSpan="3"
+				  Grid.Row="0"
+				  SelectionMode="Single"
+				  ItemsSource="{Binding Items}">
+			<ListView.ItemTemplate>
+				<DataTemplate x:DataType="local:Item">
+					<ViewCell>
+						<Grid ColumnDefinitions="Auto,*"
+							  Margin="10">
+							<Label Grid.Column="0"
+								   Text="{Binding Name}" />
+							<Label Grid.Column="1"
+								   Margin="5,0,0,0"
+								   Text="{Binding Description}" />
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+		<Button Grid.Column="0"
+				Grid.Row="1"
+				Margin="10"
+				HorizontalOptions="Start"
+				VerticalOptions="Start"
+				Text="Add"
+				Command="{Binding AddItemCommand}" />
+
+		<Button Grid.Column="1"
+				Grid.Row="1"
+				Margin="10"
+				HorizontalOptions="Start"
+				VerticalOptions="Start"
+				Text="Remove"
+				Command="{Binding RemoveItemCommand}" />
+
+		<Button Grid.Column="2"
+				Grid.Row="1"
+				Margin="10"
+				HorizontalOptions="Start"
+				VerticalOptions="Start"
+				Text="Refresh"
+				Command="{Binding RefreshCommand}" />
+	</Grid>
+
+</ContentPage>
